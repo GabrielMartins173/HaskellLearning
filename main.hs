@@ -22,6 +22,7 @@ pow base expoent | (expoent == 0) = 1 -- If the expoent is equal to 0 we should 
 
 powlist :: [Float] -> Int -> [Float]
 powlist [] expoent = [] -- If we receive an empty list we should return an empty list. 
+powlist (head:tail) expoent = [head^expoent] ++ powlist tail expoent
 
 
 
@@ -60,10 +61,13 @@ main = do
 
         -- test for the powlist funcition
         putStrLn "Potentialize a List of Integer numbers: "
-        --print(powlist [1,2,3,4,5,6,7,8,9,10] 2)
+        print(powlist [1,2,3,4,5,6,7,8,9,10] 2)
         putStrLn " "
         putStrLn "Potentialize a List of Float numbers: "
-        --print(powlist [1.5,2.3,3.4,4.6,5.4,6.789,7.14,8.364,9.214,10.164654] 3)
+        print(powlist [1.5,2.3,3.4,4.6,5.4,6.789,7.14,8.364,9.214,10.164654] 3)
+        putStrLn " "
+        putStrLn "Having 0 as an expoent we should return a list of ones: "
+        print(powlist [1.5,2.3,3.4,4.6,5.4,6.789,7.14,8.364,9.214,10.164654] 0)
         putStrLn " "
         putStrLn "Base scenario where we receive an empty list should return an empty list "
         print(powlist [] 2 :: [Float])
