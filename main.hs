@@ -1,25 +1,46 @@
+-- This function receive as parameter two lists of float numbers with values between
+-- Zero and 1 and returns a Float value between Zero and 1 that represents the 
+-- similarity of this two lists. 
 
-
+similarity :: [Float] -> [Float] -> Float
+similarity xs ys = (prod_int xs ys) / ((norma xs) * (norma ys))
 -- main function to test the implemented function. 
 
 main :: IO()
 main = do
 
-        let list = [0.1, 0.2, 0.3, 0.4]
+        let list1 = [0.1, 0.4, 0.9]
+        let list2 = [0.2, 0.4, 0.5]
 
         -- test for the somatorio function
-        putStrLn "Norm for the numbers 0.1, 0.2, 0.3, 0.4 should be 0.5477226"
-        print(norma list)
+        putStrLn "Similarity between the vectors v1 = [0.1, 0.4, 0.9] and v2 = [0.2, 0.4, 0.5] "
+        print(similarity list1 list2)
         putStrLn " "
-        putStrLn "Norm of an empty list should be Zero "
-        print(norma [])
+        putStrLn "Similarity using the same vector should be 1 "
+        print(similarity list2 list2)
         putStrLn " "
 
 
+-- This function receives two lists as input and transform this in just one list
+-- as output
 
+concatenateList :: [Float] -> [Float] -> [(Float, Float)]
+concatenateList [] _ = []
+concatenateList (x:xs) (y:ys) = (x, y) : concatenateList xs ys
 
+-- This function multiply the elements inside the tuples formed by the concatenateList
+-- function that we built before. 
 
+mutiplyTuples :: [(Float, Float)] -> [Float]
+mutiplyTuples xs = [ x * y | (x,y) <- xs]
 
+-- This function receives as parameter two lists with float numbers between zero 
+-- and 1 and returns the internal product of this two vectors of numbers. 
+
+prod_int :: [Float] -> [Float] -> Float
+prod_int xs [] = 0 -- If any of the lists are empty, the internal product
+prod_int [] ys = 0 -- will be zero 
+prod_int xs ys = sum(mutiplyTuples(concatenateList xs ys)) 
 
 
 -- This function receives as a parameter one list of float numbers between 
