@@ -1,25 +1,58 @@
+-- This function is auxiliar that calculates the value for the fibonnaci sequence
+-- on a position passed by parameter
+fib :: Int -> Int
+fib 0 = 0
+fib 1 = 1
+fib n = fib (n-1) + fib (n-2)
+
+
+-- This function returns the n first numbers of the fibonacci sequence
+-- Where n is an integer number passed by parameter
+fibonacci :: Int -> [Int]
+fibonacci 0 = [0]
+fibonacci 1 = [0,1]
+fibonacci n = take n fibonacci where fibonacci = [fib n] ++ fibonacci
+
+-- main function to test the implemented function. 
+
+main :: IO()
+main = do
+
+        putStrLn "1 element on the fibonacci sequence"
+        print(fibonacci 1)
+        putStrLn " "
+        putStrLn "5 elements on the fibonacci sequence"
+        print(fibonacci 5)
+        putStrLn " "
+        putStrLn "10 elements on the fibonacci sequence"
+        print(fibonacci 10)
+        putStrLn " "
+
+
+
+-- This function returns the n first numbers of that are potentiations with base 2
+-- Where n is an integer number passed by parameter
+twoPot :: Int -> [Int]
+twoPot n = take n twoPot where twoPot = 2:map (*2) twoPot
+
+-- This function returns the n first numbers of the sequence defined by:
+-- n0 = 2, ni = ni-1². Where n is an integer number passed by parameter
+sequenceNumbers :: Int -> [Int]
+sequenceNumbers n = take n sequenceNumbers where sequenceNumbers = 2:map (^2) sequenceNumbers
+
+-- This function receives as parameter two integer numbers 'e' and 'n', the first number 
+-- will be replicated n times into a list 
+
+replica :: Int -> Int -> [Int] 
+replica element repetitions | (repetitions == 0) = []
+                            | otherwise = [element] ++ replica element (repetitions - 1) 
+
 -- This function receive as parameter two lists of float numbers with values between
 -- Zero and 1 and returns a Float value between Zero and 1 that represents the 
 -- similarity of this two lists. 
 
 similarity :: [Float] -> [Float] -> Float
 similarity xs ys = (prod_int xs ys) / ((norma xs) * (norma ys))
--- main function to test the implemented function. 
-
-main :: IO()
-main = do
-
-        let list1 = [0.1, 0.4, 0.9]
-        let list2 = [0.2, 0.4, 0.5]
-
-        -- test for the somatorio function
-        putStrLn "Similarity between the vectors v1 = [0.1, 0.4, 0.9] and v2 = [0.2, 0.4, 0.5] "
-        print(similarity list1 list2)
-        putStrLn " "
-        putStrLn "Similarity using the same vector should be 1 "
-        print(similarity list2 list2)
-        putStrLn " "
-
 
 -- This function receives two lists as input and transform this in just one list
 -- as output
