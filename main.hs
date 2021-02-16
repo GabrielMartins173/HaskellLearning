@@ -1,9 +1,5 @@
--- This function is auxiliar that calculates the value for the fibonnaci sequence
--- on a position passed by parameter
-fib :: Int -> Int
-fib 0 = 0
-fib 1 = 1
-fib n = fib (n-1) + fib (n-2)
+-- This function is an auxiliar that generates an infinite fibonnaci sequence.
+fib a b = a:fib b (a+b)
 
 
 -- This function returns the n first numbers of the fibonacci sequence
@@ -11,21 +7,21 @@ fib n = fib (n-1) + fib (n-2)
 fibonacci :: Int -> [Int]
 fibonacci 0 = [0]
 fibonacci 1 = [0,1]
-fibonacci n = take n fibonacci where fibonacci = [fib n] ++ fibonacci
+fibonacci n = take n (fib 0 1)
 
 -- main function to test the implemented function. 
 
 main :: IO()
 main = do
 
-        putStrLn "1 element on the fibonacci sequence"
-        print(fibonacci 1)
-        putStrLn " "
         putStrLn "5 elements on the fibonacci sequence"
         print(fibonacci 5)
         putStrLn " "
         putStrLn "10 elements on the fibonacci sequence"
         print(fibonacci 10)
+        putStrLn " "
+        putStrLn "15 element on the fibonacci sequence"
+        print(fibonacci 15)
         putStrLn " "
 
 
